@@ -1,4 +1,4 @@
 luautility
 ==========
 
-a utility library written by pure lua language
+A lua utility library written by pure lua language.
