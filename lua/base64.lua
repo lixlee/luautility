@@ -38,11 +38,11 @@ base64.encode = function (s)
 	if type(s)~="string" then
 		return nil
 	end
-	local codes = {string.byte(s,1,string.len(s))}
+	local len = string.len(s)
 	local t = {}
 	local n1,n2,n3,n,a = nil
-	for i = 1, #codes , 3 do
-		n1,n2,n3 = codes[i],codes[i+1],codes[i+2]
+	for i = 1, len , 3 do
+		n1,n2,n3 = string.byte(s,i,i+2)
 		n = n1*256*256 + (n2 or 0)*256 + (n3 or 0)
 		a = n / (4096*64)
 		a = a - a%1
@@ -76,11 +76,11 @@ base64.decode = function (s)
 	if type(s)~="string" then
 		return nil
 	end
-	local codes = {string.byte(s,1,string.len(s))}
+	local len = string.len(s)
 	local t = {}
 	local na,n,a = nil
-	for i = 1, #codes , 4 do
-		na = {codes[i],codes[i+1],codes[i+2],codes[i+3]}
+	for i = 1, len , 4 do
+		na = {string.byte(s,i,i+3)}
 		if #na==4 then
 			for i=1,#na do
 				na[i] = base64code2[na[i]] or 0
